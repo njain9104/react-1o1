@@ -1,16 +1,9 @@
-import { useState } from "react";
+import FruitsCounter from "./FruitsCounter";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
-  const onCountIncrease = () => {
-    setCount(count + 1);
-  };
-
   return (
     <div>
-      <div>Count : {count}</div>
-      <button onClick={onCountIncrease}>Increase Count By 1</button>
+      <FruitsCounter />
     </div>
   );
 };
