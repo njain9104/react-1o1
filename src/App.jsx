@@ -1,9 +1,13 @@
-import FruitsCounter from "./FruitsCounter";
+import Counter from "./Counter";
 
 const App = () => {
   return (
     <div>
-      <FruitsCounter />
+      <Counter name={"Apple"} />
+      <Counter name={"Mango"} />
+      <Counter name={"Orange"} />
+      <Counter name={"Potato"} />
+      <Counter name={"Onion"} />
     </div>
   );
 };
