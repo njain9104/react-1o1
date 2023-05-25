@@ -1,13 +1,17 @@
 import Counter from "./Counter";
 
+const fruits = ["Apple", "Mango", "Orage"];
+const vegetables = ["Potato", "Onion"];
+
 const App = () => {
   return (
     <div>
-      <Counter name={"Apple"} />
-      <Counter name={"Mango"} />
-      <Counter name={"Orange"} />
-      <Counter name={"Potato"} />
-      <Counter name={"Onion"} />
+      {fruits.map((fruit) => {
+        return <Counter name={fruit} />;
+      })}
+      {vegetables.map((vegetable) => {
+        return <Counter name={vegetable} />;
+      })}
     </div>
   );
 };
