@@ -1,20 +1,32 @@
 import { useState } from "react";
 
 const Counter = (props) => {
-  const { name } = props;
+  const { item, onAddItemToBasket } = props;
 
   const [count, setCount] = useState(0);
 
   const onAddToBasket = () => {
-    setCount(count + 1);
+    const updatedCount = count + 1;
+    setCount(updatedCount);
+    onAddItemToBasket(item, updatedCount);
+  };
+
+  const getTotalPrice = () => {
+    return count * item.price;
   };
 
   return (
-    <div>
+    <div style={{ marginRight: 100 }}>
       <div>
-        {name} Count : {count}
+        <div>
+          {item.name} {"---"} {item.price}
+        </div>
+        <div>Count: {count}</div>
+        <div>
+          Total Price for {item.name}: {getTotalPrice()}
+        </div>
       </div>
-      <button onClick={onAddToBasket}>Add {name} to Basket</button>
+      <button onClick={onAddToBasket}>Add {item.name} to Basket</button>
       <br />
     </div>
   );
