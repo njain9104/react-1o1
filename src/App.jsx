@@ -14,7 +14,7 @@ const vegetables = [
 const App = () => {
   const [itemsInBasket, setItemsInBasket] = useState({});
 
-  const onAddItemToBasket = (item, count) => {
+  const onUpdateItemsInBasket = (item, count) => {
     const updatedItemsInBasket = { ...itemsInBasket };
     updatedItemsInBasket[item.name] = {
       item,
@@ -32,6 +32,21 @@ const App = () => {
     return totalPrice;
   };
 
+  const getItemCount = (itemName) => {
+    let itemCount = 0;
+    // Check if the item is there in basket or not
+    if (itemsInBasket[itemName]) {
+      // If present update the itemCount
+      itemCount = itemsInBasket[itemName].count;
+    }
+    return itemCount;
+  };
+
+  const onResetBasket = () => {
+    // Reset the basket to its initial state
+    setItemsInBasket({});
+  };
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -40,7 +55,8 @@ const App = () => {
             <Counter
               key={fruit.name}
               item={fruit}
-              onAddItemToBasket={onAddItemToBasket}
+              itemCount={getItemCount(fruit.name)}
+              onUpdateItemsInBasket={onUpdateItemsInBasket}
             />
           );
         })}
@@ -49,13 +65,16 @@ const App = () => {
             <Counter
               key={vegetable.name}
               item={vegetable}
-              onAddItemToBasket={onAddItemToBasket}
+              itemCount={getItemCount(vegetable.name)}
+              onUpdateItemsInBasket={onUpdateItemsInBasket}
             />
           );
         })}
       </div>
       <div style={{ textAlign: "center", marginTop: "150px" }}>
-        Total Price of Basket: {getTotalPrice()}
+        <div>Total Price of Basket: {getTotalPrice()}</div>
+        <br />
+        <button onClick={onResetBasket}>Reset Basket</button>
       </div>
     </div>
   );

@@ -1,18 +1,16 @@
-import { useState } from "react";
-
 const Counter = (props) => {
-  const { item, onAddItemToBasket } = props;
-
-  const [count, setCount] = useState(0);
+  const { item, itemCount, onUpdateItemsInBasket } = props;
 
   const onAddToBasket = () => {
-    const updatedCount = count + 1;
-    setCount(updatedCount);
-    onAddItemToBasket(item, updatedCount);
+    onUpdateItemsInBasket(item, itemCount + 1);
+  };
+
+  const onRemoveFromBasket = () => {
+    onUpdateItemsInBasket(item, itemCount - 1);
   };
 
   const getTotalPrice = () => {
-    return count * item.price;
+    return itemCount * item.price;
   };
 
   return (
@@ -21,12 +19,15 @@ const Counter = (props) => {
         <div>
           {item.name} {"---"} {item.price}
         </div>
-        <div>Count: {count}</div>
+        <div>Count: {itemCount}</div>
         <div>
           Total Price for {item.name}: {getTotalPrice()}
         </div>
       </div>
       <button onClick={onAddToBasket}>Add {item.name} to Basket</button>
+      <button onClick={onRemoveFromBasket} disabled={itemCount <= 0}>
+        Remove {item.name} from Basket
+      </button>
       <br />
     </div>
   );
