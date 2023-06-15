@@ -1,59 +1,47 @@
 import { useState } from "react";
 
+const DEFAULT_STATE = { name: "", price: 0, type: "" };
+
 const ItemForm = (props) => {
   const { onAddItemToShop } = props;
 
-  const [itemName, setItemName] = useState("");
-  const [itemPrice, setItemPrice] = useState(0);
-  const [itemType, setItemType] = useState("");
+  const [item, setItem] = useState(DEFAULT_STATE);
 
-  const onItemNameChange = (e) => {
-    setItemName(e.target.value);
-  };
-
-  const onItemPriceChange = (e) => {
-    setItemPrice(e.target.value);
-  };
-
-  const onItemTypeChange = (e) => {
-    setItemType(e.target.value);
+  const onItemChange = (e) => {
+    const updatedItem = { ...item, [e.target.name]: e.target.value };
+    setItem(updatedItem);
   };
 
   const onSave = () => {
-    const itemDetails = {
-      name: itemName,
-      price: itemPrice,
-      type: itemType,
-    };
     // Pass the itemDetails to App component
-    onAddItemToShop(itemDetails);
+    onAddItemToShop(item);
 
     // Reset back the item details to its initial state
-    setItemName("");
-    setItemPrice(0);
-    setItemType("");
+    setItem(DEFAULT_STATE);
   };
 
   // Save button should only be enabled where the details are non empty
   const isSaveEnabled =
-    itemName.length > 0 && itemPrice > 0 && itemType.length > 0;
+    item.name.length > 0 && item.price > 0 && item.type.length > 0;
 
   return (
     <div>
       <div>Enter Item Details</div>
       <input
         type="text"
+        name="name"
         placeholder="Enter Item Name"
-        value={itemName}
-        onChange={onItemNameChange}
+        value={item.name}
+        onChange={onItemChange}
       />
       <input
         type="number"
+        name="price"
         placeholder="Enter Item Price"
-        value={itemPrice}
-        onChange={onItemPriceChange}
+        value={item.price}
+        onChange={onItemChange}
       />
-      <select value={itemType} onChange={onItemTypeChange}>
+      <select name="type" value={item.type} onChange={onItemChange}>
         <option value="" defaultChecked>
           Please select a option
         </option>
