@@ -1,3 +1,5 @@
+import classes from "./Counter.module.css";
+
 const Counter = (props) => {
   const { item, itemCount, onUpdateItemsInBasket } = props;
 
@@ -14,7 +16,7 @@ const Counter = (props) => {
   };
 
   return (
-    <div style={{ marginRight: 100 }}>
+    <div className={classes.cntr}>
       <div>
         <div>
           {item.name} {"---"} {item.price}

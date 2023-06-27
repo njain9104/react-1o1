@@ -1,4 +1,5 @@
 import { useState } from "react";
+import classes from "./App.module.css";
 import Counter from "./Counter";
 import ItemForm from "./ItemForm";
 
@@ -50,11 +51,14 @@ const App = () => {
 
   return (
     <div>
+      <div>
+        <ItemForm onAddItemToShop={onAddItemToShop} />
+      </div>
       {itemsInShop.length === 0 ? (
         <div>There are no items in the shop...</div>
       ) : (
         <>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div className={classes.body}>
             {fruits.map((fruit) => {
               return (
                 <Counter
@@ -76,14 +80,13 @@ const App = () => {
               );
             })}
           </div>
-          <div style={{ textAlign: "center", marginTop: "150px" }}>
+          <div className={classes.summaryCntr}>
             <div>Total Price of Basket: {getTotalPrice()}</div>
             <br />
             <button onClick={onResetBasket}>Reset Basket</button>
           </div>
         </>
       )}
-      <ItemForm onAddItemToShop={onAddItemToShop} />
     </div>
   );
 };
