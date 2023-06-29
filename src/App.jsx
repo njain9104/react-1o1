@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./App.module.css";
 import Counter from "./Counter";
 import ItemForm from "./ItemForm";
 
+const initialItems = [
+  { name: "Apple", price: 100, type: "fruit" },
+  { name: "Potato", price: 30, type: "vegetable" },
+];
+
 const App = () => {
   const [itemsInBasket, setItemsInBasket] = useState({});
   const [itemsInShop, setItemsInShop] = useState([]);
+
+  useEffect(() => {
+    setItemsInShop([...initialItems]);
+  }, []);
 
   const onUpdateItemsInBasket = (item, count) => {
     const updatedItemsInBasket = { ...itemsInBasket };
