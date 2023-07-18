@@ -3,17 +3,22 @@ import classes from "./App.module.css";
 import Counter from "./Counter";
 import ItemForm from "./ItemForm";
 
-const initialItems = [
-  { name: "Apple", price: 100, type: "fruit" },
-  { name: "Potato", price: 30, type: "vegetable" },
-];
-
 const App = () => {
   const [itemsInBasket, setItemsInBasket] = useState({});
   const [itemsInShop, setItemsInShop] = useState([]);
 
+  const init = () => {
+    fetch(`${import.meta.env.VITE_API_ENDPOINT}/items`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setItemsInShop(data);
+      });
+  };
+
   useEffect(() => {
-    setItemsInShop([...initialItems]);
+    init();
   }, []);
 
   const onUpdateItemsInBasket = (item, count) => {
