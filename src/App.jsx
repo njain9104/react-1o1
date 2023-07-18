@@ -8,7 +8,7 @@ const App = () => {
   const [itemsInShop, setItemsInShop] = useState([]);
 
   const init = () => {
-    fetch(`${import.meta.env.VITE_API_ENDPOINT}/items`)
+    fetch(`https://tame-cyan-viper-kilt.cyclic.app/items`)
       .then((response) => {
         return response.json();
       })
